@@ -46,16 +46,15 @@ var errRequestFaield = errors.New("Request Failed")
 
 func main() {
 	c := make(chan string)
-	people := [2]string{"min", "hyun"}
+	people := [4]string{"min", "hyun", "youn", "hee"}
 
 	for _, person := range people {
 		go isSexy(person, c)
 	}
 	fmt.Println("Waiting message")
-	resultOne := <-c
-	resultTwo := <-c
-	fmt.Println(resultOne)
-	fmt.Println(resultTwo)
+	for i := 0; i < len(people); i++ {
+		fmt.Println(<-c)
+	}
 }
 
 func isSexy(person string, c chan string) {
