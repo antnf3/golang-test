@@ -45,19 +45,20 @@ var errRequestFaield = errors.New("Request Failed")
 // }
 
 func main() {
-	c := make(chan bool)
+	c := make(chan string)
 	people := [2]string{"min", "hyun"}
 
 	for _, person := range people {
 		go isSexy(person, c)
 	}
-	result := <-c
-	result1 := <-c
-	fmt.Println(result)
-	fmt.Println(result1)
+	fmt.Println("Waiting message")
+	resultOne := <-c
+	resultTwo := <-c
+	fmt.Println(resultOne)
+	fmt.Println(resultTwo)
 }
 
-func isSexy(person string, c chan bool) {
+func isSexy(person string, c chan string) {
 	time.Sleep(time.Second * 5)
-	c <- true
+	c <- person + " is sexy"
 }
